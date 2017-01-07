@@ -1,0 +1,27 @@
+<div class="register" ng-controller="MainCtrl">
+    <h3>Register Form</h3>
+    <div class="form">
+        <form class="register-form">
+            <input class="inline" type="text" ng-model="name" placeholder="name"/>
+            <input class="inline" type="text" ng-model="username" placeholder="username"/>
+            <input type="password" ng-model="password"  placeholder="password"/>
+            <input type="text" ng-model="emailaddress"  placeholder="email address"/>
+            <input type="text" ng-model="mobilenumber"  placeholder="mobile number"/>
+            <label style="width:30%" for="first">Student : </label>
+            <input style="width:30%" id="first" type="radio" name="content" ng-model="usertype" value="student">
+            <br />
+            <label style="width:30%" for="other">Land Owner : </label>
+            <input style="width:30%" id="other" type="radio" name="content" ng-model="usertype" value="landowner">
+            
+            <input ng-show="usertype == 'student'" type="text" ng-model="faculty"  placeholder="faculty"/>
+            <input ng-show="usertype == 'landowner'" type="text" ng-model="propertytype"  placeholder="property type"/>
+            <input ng-show="usertype == 'landowner'" type="text" ng-model="address"  placeholder="address"/>
+            <input ng-show="usertype == 'landowner'" type="text" ng-model="tenants"  placeholder="maximum number of tenants"/>
+            <input ng-show="usertype == 'landowner'" type="text" ng-model="amount"  placeholder="rent amount"/>
+        
+
+        <button ng-click="registerUser()">create</button>
+        <p class="message">Already registered? <a href="#/">Sign In</a></p>
+        </form>
+    </div>
+</div>

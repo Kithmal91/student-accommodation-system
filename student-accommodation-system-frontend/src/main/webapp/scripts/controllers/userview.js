@@ -8,7 +8,7 @@
  * Controller of the studentAccommodationApp
  */
 angular.module('studentAccommodationApp')
-        .controller('MainCtrl', function ($rootScope, $scope,$location) {
+        .controller('UserViewCtrl', function ($rootScope, $scope,$location) {
 
             $('.message a').click(function () {
                 $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
