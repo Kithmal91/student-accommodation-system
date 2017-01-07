@@ -1,0 +1,20 @@
+# IDE settings #
+###################
+*.iml
+*.idea
+*.ipr
+*.iws
+
+# Compiled source #
+###################
+*.class
+
+# Logs and databases #
+######################
+*.log
+
+
+# Other #
+######################
+lib/
+.gitignore~
