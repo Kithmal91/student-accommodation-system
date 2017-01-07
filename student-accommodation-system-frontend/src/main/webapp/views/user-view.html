@@ -1,1 +1,13 @@
 <h3>User View</h3>
+<div>
+    <div ng-repeat="item in items track by item.id">
+
+
+        <button ng-if="user.usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
+
+    </div>
+    
+    <div ng-if="user.usertype === 'owner'">
+        Visit Request Count {{user.requestCount}}
+    </div>
+</div>

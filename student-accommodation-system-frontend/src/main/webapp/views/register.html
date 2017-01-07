@@ -1,27 +1,53 @@
 <div class="register" ng-controller="MainCtrl">
     <h3>Register Form</h3>
     <div class="form">
-        <form class="register-form">
-            <input class="inline" type="text" ng-model="name" placeholder="name"/>
-            <input class="inline" type="text" ng-model="username" placeholder="username"/>
-            <input type="password" ng-model="password"  placeholder="password"/>
-            <input type="text" ng-model="emailaddress"  placeholder="email address"/>
+        <form class="register-form" name="registerForm">
+            <input class="inline" type="text" name="name" ng-model="name" placeholder="name" required/>
+
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="registerForm.username.$error.required">required</p>
+
+
+            <input class="inline" type="text" name="username" ng-model="username" placeholder="username" ng-minlength="3" ng-maxlength="8" required/>
+
+            <!-- show an error if username is too short -->
+            <p class="msg text-right text-warning" ng-show="registerForm.username.$error.minlength">Username is too short.</p>
+
+            <!-- show an error if username is too long -->
+            <p class="msg text-right text-danger" ng-show="registerForm.username.$error.maxlength">Username is too long.</p>
+
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="registerForm.username.$error.required">required</p>
+
+
+            <input type="password" ng-model="password"  name="password" placeholder="password" ng-minlength="6" ng-maxlength="10" required/>
+
+            <!-- show an error if username is too short -->
+            <p class="msg text-right text-warning" ng-show="registerForm.password.$error.minlength">password is too short. (minimum should be 6 characters)</p>
+
+            <!-- show an error if username is too long -->
+            <p class="msg text-right text-danger" ng-show="registerForm.password.$error.maxlength">password is too long.(maximum should be 10 characters)</p>
+
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="registerForm.password.$error.required">required</p>
+
+            <input type="email" name="email"  ng-model="emailaddress"  placeholder="email address" required/>
+            
+            <!-- show an error if username is too short -->
+            <p class="msg text-right text-warning" ng-show="!registerForm.email.$error.required && registerForm.email.$invalid">email is not valid</p>
+            
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="registerForm.email.$error.required">required</p>
+
             <input type="text" ng-model="mobilenumber"  placeholder="mobile number"/>
             <label style="width:30%" for="first">Student : </label>
-            <input style="width:30%" id="first" type="radio" name="content" ng-model="usertype" value="student">
+            <input style="width:30%" id="first" type="radio" name="content" ng-model="usertype" value="student" required>
             <br />
             <label style="width:30%" for="other">Land Owner : </label>
-            <input style="width:30%" id="other" type="radio" name="content" ng-model="usertype" value="landowner">
-            
-            <input ng-show="usertype == 'student'" type="text" ng-model="faculty"  placeholder="faculty"/>
-            <input ng-show="usertype == 'landowner'" type="text" ng-model="propertytype"  placeholder="property type"/>
-            <input ng-show="usertype == 'landowner'" type="text" ng-model="address"  placeholder="address"/>
-            <input ng-show="usertype == 'landowner'" type="text" ng-model="tenants"  placeholder="maximum number of tenants"/>
-            <input ng-show="usertype == 'landowner'" type="text" ng-model="amount"  placeholder="rent amount"/>
-        
+            <input style="width:30%" id="other" type="radio" name="content" ng-model="usertype" value="landowner" required>
 
-        <button ng-click="registerUser()">create</button>
-        <p class="message">Already registered? <a href="#/">Sign In</a></p>
+            <button ng-disabled="registerForm.$invalid" ng-click="registerUser()">create</button>
+            <p class="message">Already registered? <a href="#/">Sign In</a></p>
         </form>
     </div>
 </div>
