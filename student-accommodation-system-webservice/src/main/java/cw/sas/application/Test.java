@@ -13,6 +13,6 @@ public class Test {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("core-context.xml");
         final UserServiceImpl userService = context.getBean("userService", UserServiceImpl.class);
-        userService.saveUser("TTTTT");
+        //userService.saveUser("TTTTT");
     }
 }

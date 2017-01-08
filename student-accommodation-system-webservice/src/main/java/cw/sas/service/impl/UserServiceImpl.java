@@ -1,6 +1,7 @@
 package cw.sas.service.impl;
 
 import cw.sas.dao.UserDao;
+import cw.sas.model.RegisterRequest;
 import cw.sas.model.SystemUsers;
 import cw.sas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(final String username) {
+    public void saveUser(final RegisterRequest request) {
         SystemUsers user = new SystemUsers();
-        user.setUsername(username);
+        user.setEmail(request.getEmail());
+        user.setMobileNumber(request.getMobileNumber());
+        user.setName(request.getName());
+        user.setPassword(request.getPassword());
+        user.setUserType(request.getUserType());
         userDAO.create(user);
     }
 }
