@@ -28,10 +28,10 @@
     </dependency>
 
     <dependency>
-    <groupId>cw.sas</groupId>
-    <artifactId>student-accommodation-system-common</artifactId>
-    <version>${project.version}</version>
-  </dependency>
+      <groupId>cw.sas</groupId>
+      <artifactId>student-accommodation-system-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>cw.sas</groupId>
