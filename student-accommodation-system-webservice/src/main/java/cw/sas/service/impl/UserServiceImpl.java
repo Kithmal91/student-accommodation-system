@@ -28,4 +28,10 @@ public class UserServiceImpl implements UserService {
         user.setUserType(request.getUserType());
         userDAO.create(user);
     }
+
+    @Override
+    public SystemUsers getUser(String username) {
+        final SystemUsers user = userDAO.read(username);
+        return user;
+    }
 }

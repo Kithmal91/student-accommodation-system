@@ -1,6 +1,7 @@
 package cw.sas.application;
 
 import cw.sas.model.RegisterRequest;
+import cw.sas.model.SystemUsers;
 import cw.sas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,10 +34,10 @@ public class RequestHandler {
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPostRequest(@QueryParam("firstName") String firstName,
-                                      @QueryParam("lastName") String lastName) {
+    public Response createPostRequest(@QueryParam("username") String username) {
 
-        String fullName = new StringBuilder().append(firstName).append(" ").append(lastName).toString();
-        return Response.ok(fullName).build();
+        System.out.println("Username" + username);
+        final SystemUsers user = service.getUser(username);
+        return Response.ok(user).build();
     }
 }
