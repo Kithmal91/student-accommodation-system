@@ -1,6 +1,5 @@
 package cw.sas.service.impl;
 
-import cw.sas.LazyBeanUtils;
 import cw.sas.dao.UserDao;
 import cw.sas.model.RegisterRequest;
 import cw.sas.model.RegisterResponse;
@@ -30,7 +29,14 @@ public class UserServiceImpl implements UserService {
         user.setUserType(request.getUserType());
         user.setUsername(request.getUsername());
 
-        RegisterResponse response = (RegisterResponse) LazyBeanUtils.copyBean(RegisterRequest.class, request);
+        RegisterResponse response = new RegisterResponse();
+        response.setEmail(request.getEmail());
+        response.setMobileNumber(request.getMobileNumber());
+        response.setName(request.getName());
+        response.setPassword(request.getPassword());
+        response.setUserType(request.getUserType());
+        response.setUsername(request.getUsername());
+
         try {
             userDAO.create(user);
         } catch (Exception e) {
