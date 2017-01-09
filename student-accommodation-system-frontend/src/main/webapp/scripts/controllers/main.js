@@ -11,23 +11,27 @@ angular.module('studentAccommodationApp')
         .controller('MainCtrl', function ($rootScope, $scope, $location, $http) {
 
             $scope.isLoggedUser = false;
-            var SERVICE_URL = '/localhost:8080/Services';
+            var SERVICE_URL = '/student-accommodation-system-webservice';
 
             $('.message a').click(function () {
                 $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
             });
 
             $scope.registerUser = function () {
+                console.log($rootScope);
+                console.log($scope.formdata);
                 $http({
                     method: 'POST',
-                    url: SERVICE_URL,
-                    params: {
-                        "name": $scope.name,
+                    url: SERVICE_URL+'/user-service/save',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: { "name": $scope.name,
                         "username": $scope.username,
                         "password": $scope.password,
-                        "emailaddress": $scope.emailaddress,
-                        "mobilenumber": $scope.mobilenumber,
-                        "usertype": $scope.usertype
+                        "email": $scope.emailaddress,
+                        "mobileNumber": $scope.mobilenumber,
+                        "userType": $scope.usertype
                     }
                 }).then(function successCallback(response) {
                     $rootScope.user = response;
