@@ -1,6 +1,7 @@
 package cw.sas.service;
 
 import cw.sas.model.RegisterRequest;
+import cw.sas.model.RegisterResponse;
 import cw.sas.model.SystemUsers;
 
 /**
@@ -8,7 +9,7 @@ import cw.sas.model.SystemUsers;
  */
 public interface UserService {
 
-    void saveUser(final RegisterRequest request);
+    RegisterResponse saveUser(final RegisterRequest request);
 
     /**
      * Get user by username

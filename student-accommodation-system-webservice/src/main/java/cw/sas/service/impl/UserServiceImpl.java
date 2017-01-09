@@ -1,7 +1,9 @@
 package cw.sas.service.impl;
 
+import cw.sas.LazyBeanUtils;
 import cw.sas.dao.UserDao;
 import cw.sas.model.RegisterRequest;
+import cw.sas.model.RegisterResponse;
 import cw.sas.model.SystemUsers;
 import cw.sas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +21,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(final RegisterRequest request) {
+    public RegisterResponse saveUser(final RegisterRequest request) {
         SystemUsers user = new SystemUsers();
         user.setEmail(request.getEmail());
         user.setMobileNumber(request.getMobileNumber());
         user.setName(request.getName());
         user.setPassword(request.getPassword());
         user.setUserType(request.getUserType());
-        userDAO.create(user);
+        user.setUsername(request.getUsername());
+
+        RegisterResponse response = (RegisterResponse) LazyBeanUtils.copyBean(RegisterRequest.class, request);
+        try {
+            userDAO.create(user);
+        } catch (Exception e) {
+            response.setResponseCode("01");
+            response.setResponseMsg(e.getMessage());
+            return response;
+        }
+        response.setResponseCode("00");
+        return response;
     }
 
     @Override

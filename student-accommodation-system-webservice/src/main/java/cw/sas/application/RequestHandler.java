@@ -1,6 +1,7 @@
 package cw.sas.application;
 
 import cw.sas.model.RegisterRequest;
+import cw.sas.model.RegisterResponse;
 import cw.sas.model.SystemUsers;
 import cw.sas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,11 @@ public class RequestHandler {
     @POST
     @Path("/save")
     @Produces(MediaType.APPLICATION_JSON)
-    public String createPostRequest(RegisterRequest request) {
-        System.out.println("Request : " + request);
-        service.saveUser(request);
-        return "success";
+    public Response createPostRequest(RegisterRequest request) {
+        System.out.println("Request : " + request.getUserType() + request.getEmail()
+                + request.getMobileNumber() + request.getPassword() + request.getPassword());
+        RegisterResponse user = service.saveUser(request);
+        return Response.ok(user).build();
     }
 
     @GET
