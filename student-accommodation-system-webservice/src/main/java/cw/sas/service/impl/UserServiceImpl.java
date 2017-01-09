@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
         user.setName(request.getName());
         user.setPassword(request.getPassword());
         user.setUserType(request.getUserType());
+        user.setUsername(request.getUsername());
         userDAO.create(user);
     }
 
