@@ -91,8 +91,8 @@ body {
 }
 
 .login-page .welcome-img{
-    height:50%;
-    width:50%;
+    height:100%;
+    width:100%;
 }
 .nav-img{
     height: 100%;
@@ -108,9 +108,6 @@ body {
 .navbar-default{
     margin:0;
 }
-
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
   width: 360px;
@@ -318,4 +315,31 @@ body {
 }
 .msg{
     font-size:10px;
+}
+
+.user-view {
+  width: 500px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.user-view .property-list {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow-y: auto;
+}
+
+.user-view .property-list .property {
+  position: relative;
+  z-index: 2;
+  background: #F3F3F3;
+  max-width: 400px;
+  margin: 0 auto 10px;
+  padding: 10px;
+  text-align: left;
 }

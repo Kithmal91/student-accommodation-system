@@ -49,6 +49,9 @@
     </bean>
 
     <bean id="userService" class="cw.sas.service.impl.UserServiceImpl" autowire="byName"></bean>
+    <bean id="propertyService" class="cw.sas.service.impl.PropertyServiceImpl" autowire="byName"></bean>
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+    </bean>
 
 
 </beans>

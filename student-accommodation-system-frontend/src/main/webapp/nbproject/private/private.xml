@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/rane/Documents/Projects/accommodation/student-accommodation-system-frontend/src/main/webapp/index.html</file>
+            <file>file:/Users/rane/apache-tomcat-7.0.73/webapps/accommodate/views/user-view.html</file>
+            <file>file:/Users/rane/apache-tomcat-7.0.73/webapps/accommodate/scripts/app.js</file>
+            <file>file:/Users/rane/apache-tomcat-7.0.73/webapps/accommodate/styles/main.css</file>
+            <file>file:/Users/rane/apache-tomcat-7.0.73/webapps/accommodate/scripts/controllers/main.js</file>
         </group>
     </open-files>
 </project-private>
