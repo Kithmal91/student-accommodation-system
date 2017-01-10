@@ -6,9 +6,9 @@
         <form class="login-form" name="userLoginForm">
             <input type="text" name="username" ng-model="username" placeholder="username" required/>
 
-            <input type="password" name="password" placeholder="password" required/>
+            <input type="password" ng-model="password" name="password" placeholder="password" required/>
             
-            <button ng-disabled="userLoginForm.$invalid" >login</button>
+            <button ng-disabled="userLoginForm.$invalid" ng-click="loginUser()">login</button>
             <p class="message">Not registered? <a href="#/register">Create an account</a></p>
         </form>
     </div>

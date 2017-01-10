@@ -35,16 +35,14 @@ angular.module('studentAccommodationApp')
                         "userType": $scope.usertype
                     }
                 }).then(function successCallback(response) {
-                    $rootScope.user.email = response.data.email;
-                    $rootScope.user.mobileNumber = response.data.mobileNumber;
-                    $rootScope.user.name = response.data.name;
-                    $rootScope.user.userType = response.data.userType;
-                    $rootScope.user.username = response.data.username;
+                    addLoggedUser(response);
 
                     console.log("$rootScope.user", $rootScope.user);
-                    //loadUser($rootScope.user.usertype);
+                    
                 }, function errorCallback(response) {
                     console.log("Error");
+                    $scope.isLoggedUser = false;
+                     $rootScope.user = [];
                 });
 
 
@@ -60,9 +58,14 @@ angular.module('studentAccommodationApp')
                     }
                 }).then(function successCallback(response) {
                     $rootScope.user = [];
-                    console.log("$rootScope.user", $rootScope.user);
-                    addLoggedUser(response);
-                    //loadUser($rootScope.user.usertype);
+                    $scope.isLoggedUser = false;
+                    console.log("response",response);
+                    if(response.data !== null){
+                        console.log("$rootScope.user in", $rootScope.user);
+                        addLoggedUser(response);
+                        
+                    }
+                    
                     console.log("$rootScope.user", $rootScope.user);
                 }, function errorCallback(response) {
                 });
@@ -89,7 +92,9 @@ angular.module('studentAccommodationApp')
             };
 
             var loadUser = function (usertype) {
+                  console.log("in loadUser",usertype);
                 if (usertype === "student") {
+                    console.log("call loadViewForStudent",usertype);
                     loadViewForStudent();
                 } else {
                     loadViewForOwner();
@@ -100,21 +105,24 @@ angular.module('studentAccommodationApp')
             };
 
             var loadViewForStudent = function () {
-
+                console.log("in loadViewForStudent");
                 $http({
                     method: 'GET',
-                    url: SERVICE_URL,
-                    params: {
-                        "usertype": $scope.user.usertype,
-                        "userId": $scope.user.userId
-                    }
+                    url: SERVICE_URL+'/property-service/read-properties'
+                    
                 }).then(function successCallback(response) {
-                    $scope.items = response;
+                    console.log("in loadViewForStudent response",response);
+                    $rootScope.items = response.data;
+                    console.log("$scope.items",$scope.items);
+                    console.log("$location",$location);
+                    
+                    $location.path('userview');
+                    if (!$rootScope.$$phase) $rootScope.$apply();
                 }, function errorCallback(response) {
 
                 });
 
-                $location.path('#/userview');
+                
             };
 
             var loadViewForOwner = function () {
@@ -143,6 +151,8 @@ angular.module('studentAccommodationApp')
                     $rootScope.user.name = response.data.name;
                     $rootScope.user.userType = response.data.userType;
                     $rootScope.user.username = response.data.username;
+                    console.log("call loadUser",$rootScope.user.userType);
+                    loadUser($rootScope.user.userType);
             };
 
         });

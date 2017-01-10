@@ -65,7 +65,7 @@ body {
   }
 }
 .inline{
-    vertical-align: middle;
+      display: inline-block;
 }
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -229,7 +229,7 @@ body {
   z-index: 1;
   background: #FFFFFF;
   max-width: 500px;
-  margin: 0 auto 100px;
+  margin: 5%;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -318,7 +318,7 @@ body {
 }
 
 .user-view {
-  width: 500px;
+  width: 600px;
   padding: 8% 0 0;
   margin: auto;
 }
@@ -326,7 +326,8 @@ body {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 500px;
+  max-width: 600px;
+  width: 600px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
@@ -338,8 +339,68 @@ body {
   position: relative;
   z-index: 2;
   background: #F3F3F3;
-  max-width: 400px;
+  width: 100%;
   margin: 0 auto 10px;
   padding: 10px;
   text-align: left;
+}
+.property .property-name{
+    font-size:20px;
+    color: #204d74;
+    width:100%;
+}
+
+.property .info{
+    color:#204d74;
+    width:48%;
+}
+
+.property-list button{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #3FC380;
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.property button{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #3498db;
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.log-out{
+    float: right;
+    width:50%;
+    font-size:20px;
+}
+.log-out button{
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #c1c1c1;
+  width: 20%;
+  border: 0;
+  padding: 10px;
+  color: #000000;
+  font-size: 10px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }

@@ -8,18 +8,20 @@
  * Controller of the studentAccommodationApp
  */
 angular.module('studentAccommodationApp')
-        .controller('MainCtrl', function ($rootScope, $scope, $location, $http) {
-
-            $scope.isLoggedUser = false;
-            $rootScope.user = [];
+        .controller('MainCtrl', function ( $scope, $location, $http) {
+            
+            
             var SERVICE_URL = '/student-accommodation-system-webservice';
 
-            $('.message a').click(function () {
-                $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-            });
+            
+            $scope.init = function(){
+                $scope.isLoggedUser = false;
+                $scope.isAddNewProperty = false;
+                $scope.user = [];
+            };
 
             $scope.registerUser = function () {
-                console.log($rootScope);
+                console.log($scope);
                 console.log($scope.formdata);
                 $http({
                     method: 'POST',
@@ -35,14 +37,14 @@ angular.module('studentAccommodationApp')
                         "userType": $scope.usertype
                     }
                 }).then(function successCallback(response) {
+                    
+                    $scope.isLoggedUser = false;
                     addLoggedUser(response);
-
-                    console.log("$rootScope.user", $rootScope.user);
                     
                 }, function errorCallback(response) {
                     console.log("Error");
                     $scope.isLoggedUser = false;
-                     $rootScope.user = [];
+                     $scope.user = [];
                 });
 
 
@@ -57,16 +59,15 @@ angular.module('studentAccommodationApp')
                         "password": $scope.password
                     }
                 }).then(function successCallback(response) {
-                    $rootScope.user = [];
+                    
                     $scope.isLoggedUser = false;
                     console.log("response",response);
                     if(response.data !== null){
-                        console.log("$rootScope.user in", $rootScope.user);
                         addLoggedUser(response);
                         
                     }
                     
-                    console.log("$rootScope.user", $rootScope.user);
+                    console.log("$scope.user", $scope.user);
                 }, function errorCallback(response) {
                 });
 
@@ -75,29 +76,34 @@ angular.module('studentAccommodationApp')
 
             $scope.addProperty = function () {
 
+
                 $http({
                     method: 'POST',
-                    url: SERVICE_URL,
-                    params: {
-                        "propertytype": $scope.propertytype,
-                        "address": $scope.address,
-                        "tenants": $scope.tenants,
-                        "amount": $scope.amount
+                    url: SERVICE_URL+'/property-service/save-property',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        "propertyName": $scope.propertyName,
+                        "location": $scope.location,
+                        "maximumTenants": $scope.maximumTenants,
+                        "propertyType": $scope.propertyType,
+                        "amountRent": $scope.amountRent,
+                        "fee":100
                     }
                 }).then(function successCallback(response) {
-
+                    $scope.isAddNewProperty = false;
                 }, function errorCallback(response) {
 
                 });
             };
 
             var loadUser = function (usertype) {
-                  console.log("in loadUser",usertype);
                 if (usertype === "student") {
-                    console.log("call loadViewForStudent",usertype);
                     loadViewForStudent();
                 } else {
                     loadViewForOwner();
+                    loadOwnerNotification();
                 }
 
                 $scope.isLoggedUser = true;
@@ -111,17 +117,12 @@ angular.module('studentAccommodationApp')
                     url: SERVICE_URL+'/property-service/read-properties'
                     
                 }).then(function successCallback(response) {
-                    console.log("in loadViewForStudent response",response);
-                    $rootScope.items = response.data;
+                    $scope.items = response.data;
                     console.log("$scope.items",$scope.items);
-                    console.log("$location",$location);
-                    
-                    $location.path('userview');
-                    if (!$rootScope.$$phase) $rootScope.$apply();
                 }, function errorCallback(response) {
 
                 });
-
+                    console.log("user",$scope.user);
                 
             };
 
@@ -130,29 +131,73 @@ angular.module('studentAccommodationApp')
 
                 $http({
                     method: 'GET',
-                    url: SERVICE_URL,
+                    url: SERVICE_URL+'/property-service/read-properties-by-username',
                     params: {
-                        "usertype": $scope.user.usertype,
-                        "userId": $scope.user.userId
+                        "username": $scope.username,
+                        "userType": $scope.usertype
                     }
+                    
                 }).then(function successCallback(response) {
-                    $scope.items = response;
+                    $scope.items = response.data;
+                    console.log("$scope.items",$scope.items);
                 }, function errorCallback(response) {
 
                 });
+                    console.log("user",$scope.user);
 
-                $location.path('#/userview');
+            };
+            
+            var loadOwnerNotification = function () {
+
+
+                $http({
+                    method: 'GET',
+                    url: SERVICE_URL+'/property-service/read-properties-by-username',
+                    params: {
+                        "username": $scope.username,
+                        "userType": $scope.usertype
+                    }
+                    
+                }).then(function successCallback(response) {
+                    $scope.requests = response.data;
+                    console.log("$scope.requests",$scope.requests);
+                }, function errorCallback(response) {
+
+                });
+                    console.log("user",$scope.user);
+
             };
             
             var addLoggedUser = function(response){
                 
-                $rootScope.user.email = response.data.email;
-                    $rootScope.user.mobileNumber = response.data.mobileNumber;
-                    $rootScope.user.name = response.data.name;
-                    $rootScope.user.userType = response.data.userType;
-                    $rootScope.user.username = response.data.username;
-                    console.log("call loadUser",$rootScope.user.userType);
-                    loadUser($rootScope.user.userType);
+                $scope.email = response.data.email;
+                    $scope.mobileNumber = response.data.mobileNumber;
+                    $scope.name = response.data.name;
+                    $scope.usertype = response.data.userType;
+                    $scope.username = response.data.username;
+                    
+                    $scope.isLoggedUser = true;
+                    loadUser($scope.usertype);
             };
+            
+            $scope.requestToView = function(itemId){
+                
+                alert("request "+itemId + "username"+ $scope.username);
+            };
+            
+             $scope.addNewProperty = function(){
+                
+                $scope.isAddNewProperty = true;
+            };
+            
+            $scope.logOut = function(){
+                
+                $scope.isLoggedUser = false;
+                $scope.usertype = "";
+                    $scope.username = "";
+                    $scope.name = "";
+            };
+            
+            $scope.init();
 
         });

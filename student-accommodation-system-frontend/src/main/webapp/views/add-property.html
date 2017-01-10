@@ -2,14 +2,15 @@
     <h3>Add Property</h3>
     <div class="form">
         <form class="register-form">
-            
-            <input type="text" ng-model="propertytype"  placeholder="property type"/>
-            <input type="text" ng-model="address"  placeholder="address"/>
-            <input type="text" ng-model="tenants"  placeholder="maximum number of tenants"/>
-            <input type="text" ng-model="amount"  placeholder="rent amount"/>
+            <input type="text" ng-model="propertyName"  placeholder="property Name"/>
+            <input type="text" ng-model="location"  placeholder="location"/>
+            <input type="text" ng-model="maximumTenants"  placeholder="maximum number of tenants"/>
+            <input type="text" ng-model="propertyType"  placeholder="Property Type"/>
+            <input type="text" ng-model="amountRent"  placeholder="rent amount"/>
         
 
         <button ng-click="addProperty()">Add Property</button>
         </form>
     </div>
+    <span style="color:#444444;font-size:12px;">** 100/= will be charged to post a property</span>
 </div>
