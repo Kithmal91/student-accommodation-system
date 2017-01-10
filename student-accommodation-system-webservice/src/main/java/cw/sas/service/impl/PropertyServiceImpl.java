@@ -8,6 +8,7 @@ import cw.sas.model.*;
 import cw.sas.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,6 +32,7 @@ public class PropertyServiceImpl implements PropertyService {
     private NotificationDao notificationDao;
 
     @Override
+    @Transactional
     public String saveProperty(PropertyRequest request) throws Exception {
 
         Property property = new Property();
@@ -60,6 +62,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public String editProperty(PropertyRequest request) throws Exception {
 
         final Property property = propertyDao.read(request.getId());
