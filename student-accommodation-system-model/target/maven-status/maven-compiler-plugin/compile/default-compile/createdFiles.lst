@@ -1,2 +1,8 @@
-cw/sas/model/SystemUsers.class
+cw/sas/model/Property.class
 cw/sas/model/RegisterRequest.class
+cw/sas/model/Status.class
+cw/sas/model/PropertyRequest.class
+cw/sas/model/PropertyResponse.class
+cw/sas/model/SystemUser.class
+cw/sas/model/Fee.class
+cw/sas/model/RegisterResponse.class

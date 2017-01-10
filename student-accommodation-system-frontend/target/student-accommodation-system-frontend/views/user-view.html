@@ -1,13 +1,55 @@
-<h3>User View</h3>
-<div>
-    <div ng-repeat="item in items track by item.id">
-
-
-        <button ng-if="user.usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
+<div class="user-view" ng-controller="MainCtrl">
+    <!--    <h3>User View</h3>
+        <div>
+            <div ng-repeat="item in items track by item.id">
+                <p>propertytype : {{item.propertytype}}</p>
+                <p>address : {{item.address}}</p>
+                <p>tenants : {{item.tenants}}</p>
+                <p>amount : {{item.amount}}</p>
+    
+    
+    
+                <button ng-if="user.usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
+    
+            </div>
+    
+            <div ng-if="user.usertype === 'owner'">
+                Visit Request Count {{user.requestCount}}
+            </div>
+        </div>-->
+    <h3>User Views</h3>
+    <div>
 
     </div>
-    
-    <div ng-if="user.usertype === 'owner'">
-        Visit Request Count {{user.requestCount}}
+    <div class="property-list">
+        <div class="property">
+            <div class="inline">
+            <p>propertytype : propertytype</p>
+            </div>
+            <div class="inline">
+            <p>address : address</p>
+            </div>
+            
+            <p>tenants : tenants</p>
+            <p>amount : amount</p>
+        </div>
+        <div class="property">
+            <p>propertytype : propertytype</p>
+            <p>address : address</p>
+            <p>tenants : tenants</p>
+            <p>amount : amount</p>
+        </div>
+        <div class="property">
+            <p>propertytype : propertytype</p>
+            <p>address : address</p>
+            <p>tenants : tenants</p>
+            <p>amount : amount</p>
+        </div>
+        <div class="property">
+            <p>propertytype : propertytype</p>
+            <p>address : address</p>
+            <p>tenants : tenants</p>
+            <p>amount : amount</p>
+        </div>
     </div>
 </div>

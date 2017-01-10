@@ -1,5 +1,6 @@
 package cw.sas.application;
 
+import com.google.gson.Gson;
 import cw.sas.model.Property;
 import cw.sas.model.PropertyRequest;
 import cw.sas.service.PropertyService;
@@ -58,7 +59,9 @@ public class PropertyResource {
 
         try {
             final List<Property> properties = propertyService.readProperties();
-            return Response.ok(properties).build();
+            Gson gson = new Gson();
+
+            return Response.ok(gson.toJson(properties)).build();
         } catch (Exception e) {
             throw e;
         }
