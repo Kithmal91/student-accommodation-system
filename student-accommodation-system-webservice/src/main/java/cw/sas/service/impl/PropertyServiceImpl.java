@@ -1,6 +1,7 @@
 package cw.sas.service.impl;
 
 import cw.sas.dao.FeeDao;
+import cw.sas.dao.NotificationDao;
 import cw.sas.dao.PropertyDao;
 import cw.sas.dao.UserDao;
 import cw.sas.model.*;
@@ -25,6 +26,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Autowired
     private FeeDao feeDao;
+
+    @Autowired
+    private NotificationDao notificationDao;
 
     @Override
     public String saveProperty(PropertyRequest request) throws Exception {
@@ -92,6 +96,36 @@ public class PropertyServiceImpl implements PropertyService {
         try {
             List<Property> properties = propertyDao.readPropertiesByUsername(username);
             return properties;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public String sendPropertyNotification(NotificationRequest request) throws Exception {
+        Notification notification = new Notification();
+
+        //get system user
+        final SystemUser user = userDao.read(request.getUsername());
+        notification.setUser(user);
+
+        //get property
+        final Property property = propertyDao.read(Long.parseLong(request.getPropertyId()));
+        notification.setPropertyId(property);
+        notification.setPropertyOwner(property.getUser().getUsername());
+        try {
+            notificationDao.create(notification);
+            return "success";
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public List<Notification> getPropertyNotifications(String ownerName) throws Exception {
+        try {
+            final List<Notification> propertyNotifications = notificationDao.getPropertyNotifications(ownerName);
+            return propertyNotifications;
         } catch (Exception e) {
             throw e;
         }

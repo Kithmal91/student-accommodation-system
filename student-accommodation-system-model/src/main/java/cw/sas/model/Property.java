@@ -43,6 +43,7 @@ public class Property {
 
     /* specify the property status */
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     /* specify the added date */

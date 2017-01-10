@@ -1,6 +1,8 @@
 package cw.sas.application;
 
 import com.google.gson.Gson;
+import cw.sas.model.Notification;
+import cw.sas.model.NotificationRequest;
 import cw.sas.model.Property;
 import cw.sas.model.PropertyRequest;
 import cw.sas.service.PropertyService;
@@ -81,6 +83,34 @@ public class PropertyResource {
             throw e;
         }
     }
-}
 
+    @PermitAll
+    @POST
+    @Path("/send-notification")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response sendPropertyNotification(NotificationRequest request) throws Exception {
+
+        try {
+            String result = propertyService.sendPropertyNotification(request);
+            return Response.ok(result).build();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @PermitAll
+    @GET
+    @Path("/get-notification")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPropertyNotification(@QueryParam("username") String username) throws Exception {
+        try {
+            final List<Notification> propertyNotifications = propertyService.getPropertyNotifications(username);
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(propertyNotifications)).build();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+}
 
