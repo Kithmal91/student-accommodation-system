@@ -40,6 +40,7 @@ public class SystemUser {
 
     /* specify the user status */
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     /* specify the added date */
