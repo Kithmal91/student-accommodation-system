@@ -14,7 +14,7 @@
 # Logs and databases #
 ######################
 *.log
-*/target/* 
+*/target/*
 */target/**
 
 
