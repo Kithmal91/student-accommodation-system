@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Kithmal on 11/7/2015.
+ * Created by User on 11/7/2015.
  */
 public interface IDao<T, PK extends Serializable> {
     /**

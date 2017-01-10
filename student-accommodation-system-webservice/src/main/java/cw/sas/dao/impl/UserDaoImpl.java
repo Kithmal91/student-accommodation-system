@@ -1,13 +1,12 @@
 package cw.sas.dao.impl;
 
 import cw.sas.dao.UserDao;
-import cw.sas.model.SystemUsers;
+import cw.sas.model.SystemUser;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by Kithmal on 11/7/2015.
+ * Created by User on 11/7/2015.
  */
 @Repository
-public class UserDaoImpl extends DaoImpl<SystemUsers, String> implements UserDao {
-
+public class UserDaoImpl extends DaoImpl<SystemUser, String> implements UserDao {
 }

@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
- * Created by Kithmal on 11/7/2015.
+ * Created by User on 11/7/2015.
  */
 public abstract class DaoImpl<T, PK extends Serializable> implements IDao<T, PK> {
 

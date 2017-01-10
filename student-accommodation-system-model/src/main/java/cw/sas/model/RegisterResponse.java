@@ -1,8 +1,11 @@
 package cw.sas.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by User on 1/10/2017.
  */
+@XmlRootElement
 public class RegisterResponse {
 
     private String name;
@@ -13,6 +16,7 @@ public class RegisterResponse {
     private String userType;
     private String responseCode;
     private String responseMsg;
+    private String status;
 
     public String getName() {
         return name;
@@ -76,5 +80,13 @@ public class RegisterResponse {
 
     public void setResponseMsg(String responseMsg) {
         this.responseMsg = responseMsg;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

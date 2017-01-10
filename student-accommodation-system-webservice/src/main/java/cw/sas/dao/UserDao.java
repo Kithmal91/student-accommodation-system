@@ -1,10 +1,9 @@
 package cw.sas.dao;
 
-import cw.sas.model.SystemUsers;
+import cw.sas.model.SystemUser;
 
 /**
- * Created by Kithmal on 11/7/2015.
+ * Created by User on 11/7/2015.
  */
-public interface UserDao extends IDao<SystemUsers, String> {
-
+public interface UserDao extends IDao<SystemUser, String> {
 }

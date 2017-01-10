@@ -14,6 +14,7 @@ public class RegisterRequest {
     private String email;
     private String mobileNumber;
     private String userType;
+    private String address;
 
     public String getName() {
         return name;
@@ -61,5 +62,13 @@ public class RegisterRequest {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
