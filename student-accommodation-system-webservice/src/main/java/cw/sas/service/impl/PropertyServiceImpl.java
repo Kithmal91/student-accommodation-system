@@ -81,7 +81,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setUser(user);
 
         try {
-            propertyDao.create(property);
+            propertyDao.update(property);
             return "success";
         } catch (Exception e) {
             throw e;
@@ -105,6 +105,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public String sendPropertyNotification(NotificationRequest request) throws Exception {
         Notification notification = new Notification();
 
