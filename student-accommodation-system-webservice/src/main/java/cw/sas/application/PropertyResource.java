@@ -75,7 +75,8 @@ public class PropertyResource {
 
         try {
             final List<Property> properties = propertyService.readPropertiesByUsername(username, userType);
-            return Response.ok(properties).build();
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(properties)).build();
         } catch (Exception e) {
             throw e;
         }
