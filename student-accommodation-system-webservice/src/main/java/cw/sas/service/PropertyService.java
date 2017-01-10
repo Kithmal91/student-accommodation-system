@@ -36,5 +36,14 @@ public interface PropertyService {
      */
     List<Property> readProperties() throws Exception;
 
+    /**
+     * read properties by username
+     *
+     * @param username
+     * @param userType
+     * @return
+     */
+    List<Property> readPropertiesByUsername(String username, String userType) throws Exception;
+
 
 }

@@ -48,7 +48,7 @@ public class PropertyServiceImpl implements PropertyService {
             fee.setFee(Double.parseDouble(request.getFee()));
             fee.setPropertyId(prop);
             feeDao.create(fee);
-            
+
             return "success";
         } catch (Exception e) {
             throw e;
@@ -85,5 +85,15 @@ public class PropertyServiceImpl implements PropertyService {
     public List<Property> readProperties() throws Exception {
         List<Property> propertyList = propertyDao.findAll();
         return propertyList;
+    }
+
+    @Override
+    public List<Property> readPropertiesByUsername(String username, String userType) throws Exception {
+        try {
+            List<Property> properties = propertyDao.readPropertiesByUsername(username);
+            return properties;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
