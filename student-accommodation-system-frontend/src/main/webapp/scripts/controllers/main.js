@@ -23,7 +23,7 @@ angular.module('studentAccommodationApp')
                 console.log($scope.formdata);
                 $http({
                     method: 'POST',
-                    url: SERVICE_URL + '/user-service/save',
+                    url: SERVICE_URL + '/user-service/save-user',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -52,15 +52,18 @@ angular.module('studentAccommodationApp')
 
             $scope.loginUser = function () {
                 $http({
-                    method: 'POST',
-                    url: SERVICE_URL,
+                    method: 'GET',
+                    url: SERVICE_URL +'/user-service/user-auth',
                     params: {
-                        "name": $scope.username,
+                        "username": $scope.username,
                         "password": $scope.password
                     }
                 }).then(function successCallback(response) {
-                    $rootScope.user = response;
-                    loadUser($rootScope.user.usertype);
+                    $rootScope.user = [];
+                    console.log("$rootScope.user", $rootScope.user);
+                    addLoggedUser(response);
+                    //loadUser($rootScope.user.usertype);
+                    console.log("$rootScope.user", $rootScope.user);
                 }, function errorCallback(response) {
                 });
 
@@ -131,6 +134,15 @@ angular.module('studentAccommodationApp')
                 });
 
                 $location.path('#/userview');
+            };
+            
+            var addLoggedUser = function(response){
+                
+                $rootScope.user.email = response.data.email;
+                    $rootScope.user.mobileNumber = response.data.mobileNumber;
+                    $rootScope.user.name = response.data.name;
+                    $rootScope.user.userType = response.data.userType;
+                    $rootScope.user.username = response.data.username;
             };
 
         });
