@@ -64,6 +64,19 @@ public class PropertyResource {
         }
     }
 
+    @PermitAll
+    @GET
+    @Path("/read-properties-by-username")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readPropertiesByUsername(@QueryParam("username") String username, @QueryParam("userType") String userType) throws Exception {
+
+        try {
+            final List<Property> properties = propertyService.readPropertiesByUsername(username, userType);
+            return Response.ok(properties).build();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
 
 
