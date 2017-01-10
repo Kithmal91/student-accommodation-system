@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     public RegisterResponse saveUser(final RegisterRequest request) throws Exception, NoResultException {
 
         //check whether the user already exsists
-        if (userDAO.read(request.getUsername()) == null) {
+        if (userDAO.read(request.getUsername()) != null) {
             throw new NoResultException();
         }
 
