@@ -32,8 +32,8 @@ public class PropertyResource {
     public Response saveProperty(PropertyRequest request) throws Exception {
 
         try {
-            propertyService.saveProperty(request);
-            return Response.ok("success").build();
+            final String result = propertyService.saveProperty(request);
+            return Response.ok(result).build();
         } catch (Exception e) {
             throw e;
         }
