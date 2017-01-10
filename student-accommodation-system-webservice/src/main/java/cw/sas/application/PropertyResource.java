@@ -19,7 +19,7 @@ import java.util.List;
 @Path("/property-service")
 public class PropertyResource {
 
-    @Autowired
+    @Autowired(required = false)
     private PropertyService propertyService;
 
     @PermitAll

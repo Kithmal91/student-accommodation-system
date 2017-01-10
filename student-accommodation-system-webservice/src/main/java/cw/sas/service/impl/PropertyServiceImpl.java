@@ -46,7 +46,7 @@ public class PropertyServiceImpl implements PropertyService {
             Fee fee = new Fee();
             fee.setUser(user);
             fee.setFee(Double.parseDouble(request.getFee()));
-            fee.setPropertyId(prop.getId());
+            fee.setPropertyId(prop);
             feeDao.create(fee);
             
             return "success";

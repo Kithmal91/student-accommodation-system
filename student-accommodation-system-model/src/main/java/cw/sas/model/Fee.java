@@ -23,7 +23,7 @@ public class Fee {
     /* specify the property owner */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id")
-    private Long propertyId;
+    private Property propertyId;
 
     /* specify the fee */
     @Column(name = "fee")
@@ -50,14 +50,6 @@ public class Fee {
         this.user = user;
     }
 
-    public Long getPropertyId() {
-        return propertyId;
-    }
-
-    public void setPropertyId(Long propertyId) {
-        this.propertyId = propertyId;
-    }
-
     public Double getFee() {
         return fee;
     }
@@ -72,5 +64,13 @@ public class Fee {
 
     public void setAddedDate(Calendar addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public Property getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Property propertyId) {
+        this.propertyId = propertyId;
     }
 }

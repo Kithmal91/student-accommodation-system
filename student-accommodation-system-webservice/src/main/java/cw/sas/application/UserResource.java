@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
 @Path("/user-service")
 public class UserResource {
 
-    @Autowired
+    @Autowired(required = false)
     private UserService service;
 
     @PermitAll
