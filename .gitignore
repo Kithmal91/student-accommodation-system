@@ -8,7 +8,9 @@
 # Compiled source #
 ###################
 *.class
-
+*.jar
+*.war
+*.Ist
 # Logs and databases #
 ######################
 *.log

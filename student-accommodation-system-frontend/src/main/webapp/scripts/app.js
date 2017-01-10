@@ -34,8 +34,7 @@ angular
                         templateUrl: 'views/register.html'
                     })
                     .when("/userview", {
-                        templateUrl: "views/user-view.html",
-                        controller: 'UserViewCtrl'
+                        templateUrl: "views/user-view.html"
                     })
                     .otherwise({
                         redirectTo: '/'

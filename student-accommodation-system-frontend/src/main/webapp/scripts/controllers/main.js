@@ -11,6 +11,7 @@ angular.module('studentAccommodationApp')
         .controller('MainCtrl', function ($rootScope, $scope, $location, $http) {
 
             $scope.isLoggedUser = false;
+            $rootScope.user = [];
             var SERVICE_URL = '/student-accommodation-system-webservice';
 
             $('.message a').click(function () {
@@ -22,11 +23,11 @@ angular.module('studentAccommodationApp')
                 console.log($scope.formdata);
                 $http({
                     method: 'POST',
-                    url: SERVICE_URL+'/user-service/save',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: { "name": $scope.name,
+                    url: SERVICE_URL + '/user-service/save',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {"name": $scope.name,
                         "username": $scope.username,
                         "password": $scope.password,
                         "email": $scope.emailaddress,
@@ -34,9 +35,16 @@ angular.module('studentAccommodationApp')
                         "userType": $scope.usertype
                     }
                 }).then(function successCallback(response) {
-                    $rootScope.user = response;
-                    loadUser($rootScope.user.usertype);
+                    $rootScope.user.email = response.data.email;
+                    $rootScope.user.mobileNumber = response.data.mobileNumber;
+                    $rootScope.user.name = response.data.name;
+                    $rootScope.user.userType = response.data.userType;
+                    $rootScope.user.username = response.data.username;
+
+                    console.log("$rootScope.user", $rootScope.user);
+                    //loadUser($rootScope.user.usertype);
                 }, function errorCallback(response) {
+                    console.log("Error");
                 });
 
 
@@ -89,7 +97,7 @@ angular.module('studentAccommodationApp')
             };
 
             var loadViewForStudent = function () {
-                
+
                 $http({
                     method: 'GET',
                     url: SERVICE_URL,
@@ -98,11 +106,11 @@ angular.module('studentAccommodationApp')
                         "userId": $scope.user.userId
                     }
                 }).then(function successCallback(response) {
-                   $scope.items = response;
+                    $scope.items = response;
                 }, function errorCallback(response) {
 
                 });
-                
+
                 $location.path('#/userview');
             };
 
@@ -117,11 +125,11 @@ angular.module('studentAccommodationApp')
                         "userId": $scope.user.userId
                     }
                 }).then(function successCallback(response) {
-                   $scope.items = response;
+                    $scope.items = response;
                 }, function errorCallback(response) {
 
                 });
-                
+
                 $location.path('#/userview');
             };
 
