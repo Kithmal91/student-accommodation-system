@@ -1,3 +1,5 @@
+cw/sas/model/NotificationRequest.class
+cw/sas/model/Notification.class
 cw/sas/model/Property.class
 cw/sas/model/RegisterRequest.class
 cw/sas/model/Status.class

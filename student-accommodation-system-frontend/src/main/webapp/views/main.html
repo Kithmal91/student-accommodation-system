@@ -16,13 +16,14 @@
 
                 <button ng-disabled="userLoginForm.$invalid" ng-click="loginUser()">login</button>
                 <p class="message">Not registered? <a href="#/register">Create an account</a></p>
+                <p class="text-danger" ng-show="loginFailed === true">username or password is incorrect</p>
             </form>
         </div>
     </div>
 
     <div ng-show="isLoggedUser == true" class="user-view" >
 
-
+{{usertype}}
         <div ng-show="usertype === 'student'">
             <h3>Available Properties</h3>
         </div>
@@ -78,7 +79,7 @@
                     <select class="text-right inline" name="singleSelect" ng-model="select.singleSelect" required>
                         <option value="ACTIVE">Available</option>
                         <option value="INACTIVE">Not Available</option>
-                    </select><br>
+                    </select><br><br>
 
 
                     <button ng-disabled="addproperty - form.$invalid" ng-click="addProperty()">Add Property</button>

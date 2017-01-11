@@ -8,7 +8,7 @@
  * Controller of the studentAccommodationApp
  */
 angular.module('studentAccommodationApp')
-        .controller('MainCtrl', function ($scope, $location, $http) {
+        .controller('MainCtrl', function ($rootScope, $scope, $location, $http) {
 
 
             var SERVICE_URL = '/student-accommodation-system-webservice';
@@ -42,7 +42,9 @@ angular.module('studentAccommodationApp')
                 }).then(function successCallback(response) {
 
                     $scope.isLoggedUser = false;
-                    addLoggedUser(response);
+                    //addLoggedUser(response);
+                    $location.path('/');
+                    if(!$scope.$$phase) $scope.$apply();
 
                 }, function errorCallback(response) {
                     console.log("Error");
@@ -65,9 +67,12 @@ angular.module('studentAccommodationApp')
 
                     $scope.isLoggedUser = false;
                     console.log("response", response);
-                    if (response.data !== null) {
+                    if (response.data !== null && response.data !== "") {
+                        $scope.loginFailed = false;
                         addLoggedUser(response);
 
+                    } else {
+                        $scope.loginFailed = true;
                     }
 
                     console.log("$scope.user", $scope.user);
@@ -78,7 +83,7 @@ angular.module('studentAccommodationApp')
             };
 
             $scope.addProperty = function () {
-
+                console.log("rane", $scope.select.singleSelect);
                 if ($scope.propertyId && $scope.propertyId !== null) {
 
                     $http({
@@ -100,6 +105,7 @@ angular.module('studentAccommodationApp')
                         }
                     }).then(function successCallback(response) {
                         console.log("response", response);
+
                         $scope.isAddNewProperty = false;
                         loadUser($scope.usertype);
                     }, function errorCallback(response) {
@@ -125,13 +131,15 @@ angular.module('studentAccommodationApp')
                         }
                     }).then(function successCallback(response) {
                         console.log("response", response);
+                        
                         $scope.isAddNewProperty = false;
-                         loadUser($scope.usertype);
+                        loadUser($scope.usertype);
                     }, function errorCallback(response) {
                         $scope.isAddNewProperty = false;
                     });
                 }
                 $scope.isAddNewProperty = false;
+                loadUser($scope.usertype);
             };
 
             var loadUser = function (usertype) {
@@ -139,7 +147,6 @@ angular.module('studentAccommodationApp')
                     loadViewForStudent();
                 } else {
                     loadViewForOwner();
-                    loadOwnerNotification();
                 }
 
                 $scope.isLoggedUser = true;
@@ -164,7 +171,7 @@ angular.module('studentAccommodationApp')
 
             var loadViewForOwner = function () {
 
-
+                console.log("$scope.username", $scope.username);
                 $http({
                     method: 'GET',
                     url: SERVICE_URL + '/property-service/read-properties-by-username',
@@ -176,6 +183,8 @@ angular.module('studentAccommodationApp')
                 }).then(function successCallback(response) {
                     $scope.items = response.data;
                     console.log("$scope.items", $scope.items);
+
+                    loadOwnerNotification();
                 }, function errorCallback(response) {
 
                 });

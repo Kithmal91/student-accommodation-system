@@ -7,7 +7,9 @@ cw/sas/service/UserService.class
 cw/sas/dao/impl/UserDaoImpl.class
 cw/sas/dao/UserDao.class
 cw/sas/service/impl/UserServiceImpl.class
+cw/sas/dao/NotificationDao.class
 cw/sas/dao/impl/PropertyDaoImpl.class
+cw/sas/dao/impl/NotificationDaoImpl.class
 cw/sas/application/UserResource.class
 cw/sas/dao/PropertyDao.class
 cw/sas/service/PropertyService.class
