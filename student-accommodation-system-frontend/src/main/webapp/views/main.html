@@ -1,8 +1,9 @@
 <div   ng-controller="MainCtrl">
     <div class="log-out text-right" div ng-show="isLoggedUser == true" >
-        {{username}}
-        <br>
         <button ng-click="logOut()">Log Out</button>
+        <br>
+       Hello {{username}}
+
     </div>
     <div ng-show="isLoggedUser == false" class="login-page">
         <div>
@@ -23,7 +24,7 @@
 
     <div ng-show="isLoggedUser == true" class="user-view" >
 
-{{usertype}}
+You have logged in as {{usertype}}
         <div ng-show="usertype === 'student'">
             <h3>Available Properties</h3>
         </div>

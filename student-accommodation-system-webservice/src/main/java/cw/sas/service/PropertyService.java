@@ -66,5 +66,14 @@ public interface PropertyService {
      */
     List<Notification> getPropertyNotifications(String ownerName) throws Exception;
 
+    /**
+     * Get the fees
+     *
+     * @param username
+     * @return
+     * @throws Exception
+     */
+    Double getFeesByUsername(String username) throws Exception;
+
 
 }

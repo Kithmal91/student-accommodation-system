@@ -134,4 +134,23 @@ public class PropertyServiceImpl implements PropertyService {
             throw e;
         }
     }
+
+    @Override
+    public Double getFeesByUsername(String username) throws Exception {
+        final List<Fee> fees = feeDao.getFees(username);
+        int size = 0;
+
+        if (fees.size() > 0) {
+            size = fees.size();
+        } else {
+            size = 0;
+        }
+
+        if (size != 0) {
+            Double fee = new Double(size * 100);
+            return fee;
+        } else {
+            return new Double(0);
+        }
+    }
 }

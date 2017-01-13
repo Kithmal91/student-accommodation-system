@@ -16,12 +16,12 @@ public class Notification {
     private Long id;
 
     /* specify the system owner */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     private SystemUser user;
 
     /* specify the property owner */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "property_id")
     private Property propertyId;
 

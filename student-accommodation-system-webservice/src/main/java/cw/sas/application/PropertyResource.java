@@ -112,5 +112,19 @@ public class PropertyResource {
         }
     }
 
+    @PermitAll
+    @GET
+    @Path("/get-fee")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFeesByUsername(@QueryParam("username") String username) throws Exception {
+        try {
+            final Double fee = propertyService.getFeesByUsername(username);
+            return Response.ok(fee).build();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
 }
 

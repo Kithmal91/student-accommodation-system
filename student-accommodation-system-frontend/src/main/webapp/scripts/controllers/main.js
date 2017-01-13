@@ -234,7 +234,7 @@ angular.module('studentAccommodationApp')
                     },
                     data: {
                         "username": $scope.username,
-                        "id": itemId
+                        "propertyId": itemId
                     }
                 }).then(function successCallback(response) {
                     console.log("response", response);
