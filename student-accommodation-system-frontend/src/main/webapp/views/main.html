@@ -1,9 +1,11 @@
 <div   ng-controller="MainCtrl">
     <div class="log-out text-right" div ng-show="isLoggedUser == true" >
+        
         <button ng-click="logOut()">Log Out</button>
         <br>
        Hello {{username}}
-
+       <br>
+       <p style="font-size: 10px;">You have logged in as {{usertype}}</p>
     </div>
     <div ng-show="isLoggedUser == false" class="login-page">
         <div>
@@ -24,7 +26,7 @@
 
     <div ng-show="isLoggedUser == true" class="user-view" >
 
-You have logged in as {{usertype}}
+        
         <div ng-show="usertype === 'student'">
             <h3>Available Properties</h3>
         </div>
@@ -48,21 +50,35 @@ You have logged in as {{usertype}}
                 <p style="width:100%;" class="inline info">Address : <b>{{item.location}}</b></p>
                 <button style="width:40%;" class="right-block" ng-if="usertype !== 'student' && !isAddNewProperty" ng-click="edit(item)">Edit</button>
                 <button class="center-block" ng-if="usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
+
             </div>
             <div ng-if="items.length === 0"> 0 Properties added</div>
 
 
         </div>
 
-        <button class="center-block" ng-if="usertype !== 'student' && !isAddNewProperty" ng-click="addNewProperty()">Add new property</button>
+        <button style="margin-bottom: 50px;" class="center-block" ng-if="usertype !== 'student' && !isAddNewProperty" ng-click="addNewProperty()">Add new property</button>
+        
+        <div ng-show="fee && usertype !== 'student' && !isAddNewProperty" class="property-list">
+            <div class="text-center" > Your total fee amount = <b>{{fee}}</b> </div>
+            
+        </div>
 
         <div ng-show="usertype !== 'student' && !isAddNewProperty">
             <h3>Requests</h3>
         </div>
         <div ng-show="usertype !== 'student' && !isAddNewProperty" class="property-list">
-
+            <div class="text-left" > You have {{requests.length }} {{(requests.length > 0) ? 'requests':'request'}}</div>
             <div ng-repeat="request in requests"  class="property">
-
+                
+                <p class="inline property-name" > Property Name : <b>{{request.properyId.propertyName}}</b></p>
+                
+                <div >
+                    <p class="inline info" >Student Name : <b>{{request.user.name}}</b></p>
+                    <p class="inline info">Email : <b>{{request.user.email}}</b></p>
+                </div>
+                <p class="inline info">Mobile Number : <b>{{request.user.mobileNumber}}</b></p>
+                     
             </div>
         </div>
 
@@ -83,11 +99,11 @@ You have logged in as {{usertype}}
                     </select><br><br>
 
 
-                    <button ng-disabled="addproperty - form.$invalid" ng-click="addProperty()">Add Property</button>
+                    <button ng-disabled="addproperty-form.$invalid" ng-click="addProperty()">Add Property</button>
                 </form>
             </div>
             <span style="color:#444444;font-size:12px;">** 100/= will be charged to post a property</span>
-            {{isAddNewProperty}}
+            
         </div>
 
 
