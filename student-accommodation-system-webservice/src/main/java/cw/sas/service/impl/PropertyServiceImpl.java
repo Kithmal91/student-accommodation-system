@@ -33,7 +33,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public String saveProperty(PropertyRequest request) throws Exception {
+    public Property saveProperty(PropertyRequest request) throws Exception {
 
         Property property = new Property();
         property.setStatus(Status.ACTIVE);
@@ -55,7 +55,7 @@ public class PropertyServiceImpl implements PropertyService {
             fee.setPropertyId(prop);
             feeDao.create(fee);
 
-            return "success";
+            return prop;
         } catch (Exception e) {
             throw e;
         }
@@ -63,7 +63,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public String editProperty(PropertyRequest request) throws Exception {
+    public Property editProperty(PropertyRequest request) throws Exception {
 
         final Property property = propertyDao.read(request.getId());
 
@@ -81,8 +81,8 @@ public class PropertyServiceImpl implements PropertyService {
         property.setUser(user);
 
         try {
-            propertyDao.update(property);
-            return "success";
+            final Property updatedProperty = propertyDao.update(property);
+            return updatedProperty;
         } catch (Exception e) {
             throw e;
         }

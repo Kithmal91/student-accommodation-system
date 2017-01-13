@@ -19,7 +19,7 @@ public interface PropertyService {
      * @return
      * @throws Exception
      */
-    String saveProperty(PropertyRequest request) throws Exception;
+    Property saveProperty(PropertyRequest request) throws Exception;
 
     /**
      * Edit Property
@@ -28,7 +28,7 @@ public interface PropertyService {
      * @return
      * @throws Exception
      */
-    String editProperty(PropertyRequest request) throws Exception;
+    Property editProperty(PropertyRequest request) throws Exception;
 
     /**
      * Read all properties
