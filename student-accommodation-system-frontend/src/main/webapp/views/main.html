@@ -27,70 +27,75 @@
     </div>
 
     <div ng-show="isLoggedUser == true" class="user-view" >
-                    <button style="width:100%;" ng-click="pdf()">PDF REPORT</button>
 
-        
-        <div  class="left-block inline" ng-if="usertype !== 'student' && !isAddNewProperty" >         ̰
-            <button style="width:100%;" ng-click="addNewProperty()">Add new property</button>
-        </div>
-
-        <div style="padding:2px;margin:0px;width:25%;" ng-show="fee && usertype !== 'student' && !isAddNewProperty" class="right-block property-list inline">
-            <div class="text-center" > Your total fee amount = <b>{{fee}}</b> </div>
-
-        </div>
-
-
-        <div ng-show="usertype === 'student'">
-            <h3>Available Properties</h3>
-        </div>
-        <div ng-show="usertype !== 'student' && !isAddNewProperty">
-            <h3>Added Properties</h3>
-        </div>
-
-        <div ng-show="!isAddNewProperty" class="property-list inline">
-            <input placeholder="search here..." style="font-family: 'Roboto', sans-serif;outline: 0;
-                   background: #f2f2f2;width: 100%;border: 0;margin: 0 0 15px;
-                   padding: 15px;box-sizing: border-box;font-size: 14px;" ng-model="search">
-
-            <div ng-repeat="item in items| filter:search:strict"  class="property">
-
-                <p class="inline property-name" > Name : <b>{{item.propertyName}}</b></p>
-                <div >
-
-                    <p class="inline info">Property Type : <b>{{item.propertyType}}</b></p>
-                    <p class="inline info">Maximum Tenants : <b>{{item.maximumTenants}}</b></p>
-                </div>
-                <div >
-                    <p class="inline info" >Rent Amount : <b>{{item.amountRent}}</b></p>
-                    <p class="inline info">Status : <b>{{item.status}}</b></p>
-                </div>
-                <p style="width:100%;" class="inline info">Address : <b>{{item.location}}</b></p>
-                <button style="width:40%;" class="right-block" ng-if="usertype !== 'student' && !isAddNewProperty" ng-click="edit(item)">Edit</button>
-                <button class="center-block" ng-disabled="item.isPropertyRequested === true" ng-if="usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
-
+        <div>
+            <div  style="width: 45%;float:left;" class="left-block inline" ng-if="usertype !== 'student' && !isAddNewProperty" >
+                <button style="width:30%;" ng-click="addNewProperty()">Add new property</button>
             </div>
-            <div ng-if="items.length === 0"> 0 Properties added</div>
+            <div  style="width: 45%;" class="right-block inline" ng-show="fee && usertype !== 'student' && !isAddNewProperty"  >
 
-
-        </div>
-
-
-        <div ng-show="usertype !== 'student' && !isAddNewProperty">
-            <h3>Requests</h3>
-        </div>
-        <div ng-show="usertype !== 'student' && !isAddNewProperty" class="property-list">
-            <div class="text-left" > You have {{requests.length}} {{(requests.length > 0) ? 'requests':'request'}}</div>
-            <div ng-repeat="request in requests"  class="property">
-
-                <p class="inline property-name" > Property Name : <b>{{request.properyId.propertyName}}</b></p>
-
-                <div >
-                    <p class="inline info" >Student Name : <b>{{request.user.name}}</b></p>
-                    <p class="inline info">Email : <b>{{request.user.email}}</b></p>
-                </div>
-                <p class="inline info">Mobile Number : <b>{{request.user.mobileNumber}}</b></p>
-
+                <div class="text-center amount" > Your total fee amount = <b>{{fee}}</b> </div>
             </div>
+
+            <div style="float:left;"  class="inline">
+                <div ng-show="usertype === 'student'">
+                    <h3>Available Properties</h3>
+                </div>
+                <div ng-show="usertype !== 'student' && !isAddNewProperty">
+                    <h3>Added Properties</h3>
+                </div>
+
+                <div ng-show="!isAddNewProperty" class="property-list inline">
+                    <input placeholder="search here..." style="font-family: 'Roboto', sans-serif;outline: 0;
+                           background: #f2f2f2;width: 100%;border: 0;margin: 0 0 15px;
+                           padding: 15px;box-sizing: border-box;font-size: 14px;" ng-model="search">
+
+                    <div ng-repeat="item in items| filter:search:strict"  class="property">
+
+                        <p class="inline property-name" > Name : <b>{{item.propertyName}}</b></p>
+                        <div >
+
+                            <p class="inline info">Property Type : <b>{{item.propertyType}}</b></p>
+                            <p class="inline info">Maximum Tenants : <b>{{item.maximumTenants}}</b></p>
+                        </div>
+                        <div >
+                            <p class="inline info" >Rent Amount : <b>{{item.amountRent}}</b></p>
+                            <p class="inline info">Status : <b>{{item.status}}</b></p>
+                        </div>
+                        <p style="width:100%;" class="inline info">Address : <b>{{item.location}}</b></p>
+                        <button style="width:40%;" class="right-block" ng-if="usertype !== 'student' && !isAddNewProperty" ng-click="edit(item)">Edit</button>
+                        <button class="center-block" ng-disabled="item.isPropertyRequested === true" ng-if="usertype === 'student'" ng-click="requestToView(item.id)">Request to View</button>
+
+                    </div>
+                    <div ng-if="items.length === 0"> 0 Properties added</div>
+
+
+                </div>
+            </div>
+
+            <div style="float:right;"  class="inline">
+                <div ng-show="usertype !== 'student' && !isAddNewProperty">
+                    <h3>Requests</h3>
+                </div>
+                <div ng-show="usertype !== 'student' && !isAddNewProperty" class="property-list">
+                    <div class="text-left" > You have {{requests.length}} {{(requests.length > 0) ? 'requests':'request'}}</div>
+                    <div ng-repeat="request in requests"  class="property">
+
+                        <p class="inline property-name" > Property Name : <b>{{request.properyId.propertyName}}</b></p>
+
+                        <div >
+                            <p class="inline info" >Student Name : <b>{{request.user.name}}</b></p>
+                            <p class="inline info">Email : <b>{{request.user.email}}</b></p>
+                        </div>
+                        <p class="inline info">Mobile Number : <b>{{request.user.mobileNumber}}</b></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show=" !isAddNewProperty" class="pdf-btn" style="float: left;position: relative;">
+            <button style="width:100%;" ng-click="pdf()">PDF REPORT</button>
         </div>
 
         <div ng-show="usertype !== 'student' && isAddNewProperty" class="register property-list">
@@ -117,6 +122,6 @@
 
         </div>
 
-
     </div>
+
 </div>
