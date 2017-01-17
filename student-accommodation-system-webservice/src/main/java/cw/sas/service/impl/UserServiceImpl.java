@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public SystemUser savePassword(String username, String password) throws Exception {
         try {
             final SystemUser user = userDAO.read(username);
