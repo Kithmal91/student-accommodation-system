@@ -111,7 +111,7 @@ body {
 
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  /*padding: 8% 0 0;*/
   margin: auto;
 }
 .login-page .form {
@@ -345,9 +345,9 @@ body {
 }
 
 .user-view {
-  width: 600px;
-  padding: 8% 0 0;
-  margin: auto;
+  width: 95%;
+/*  padding: 8% 0 0;*/
+      margin: 0 5% 0 5%;
 }
 .user-view .property-list {
   position: relative;
@@ -413,10 +413,19 @@ body {
   cursor: pointer;
 }
 
+.property button[disabled]{
+   cursor: default; 
+   background: #75a3c1;
+}
+.property button[disabled]:hover,.property button[disabled]:active,.property button[disabled]:focus {
+  background: #75a3c1;
+}
+
 .log-out{
     float: right;
-    width:50%;
+    width:25%;
     font-size:20px;
+    margin-right:5%;
 }
 .log-out button{
     font-family: "Roboto", sans-serif;

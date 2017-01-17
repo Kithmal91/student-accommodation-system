@@ -8,7 +8,7 @@
  * Controller of the studentAccommodationApp
  */
 angular.module('studentAccommodationApp')
-        .controller('MainCtrl', function ($rootScope, $scope, $location, $http) {
+        .controller('MainCtrl', function ($scope, $location, $http) {
 
 
             var SERVICE_URL = '/student-accommodation-system-webservice';
@@ -21,37 +21,49 @@ angular.module('studentAccommodationApp')
                 $scope.select = {
                     singleSelect: null
                 };
+//                $scope.Msgdata = {
+//                    boldTextTitle: "Done",
+//                    textAlert: "Some content",
+//                    mode: 'success'
+//                };
+
             };
 
             $scope.registerUser = function () {
                 console.log($scope);
                 console.log($scope.formdata);
-                $http({
-                    method: 'POST',
-                    url: SERVICE_URL + '/user-service/save-user',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: {"name": $scope.name,
-                        "username": $scope.username,
-                        "password": $scope.password,
-                        "email": $scope.emailaddress,
-                        "mobileNumber": $scope.mobilenumber,
-                        "userType": $scope.usertype
-                    }
-                }).then(function successCallback(response) {
+                if ($scope.password === $scope.passwordrepeat) {
 
-                    $scope.isLoggedUser = false;
-                    //addLoggedUser(response);
-                    $location.path('/');
-                    if (!$scope.$$phase)
-                        $scope.$apply();
+                    $http({
+                        method: 'POST',
+                        url: SERVICE_URL + '/user-service/save-user',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: {"name": $scope.name,
+                            "username": $scope.username,
+                            "password": $scope.password,
+                            "email": $scope.emailaddress,
+                            "mobileNumber": $scope.mobilenumber,
+                            "userType": $scope.usertype,
+                            "address": $scope.address
+                        }
+                    }).then(function successCallback(response) {
 
-                }, function errorCallback(response) {
-                    console.log("Error");
-                    $scope.isLoggedUser = false;
-                    $scope.user = [];
-                });
+                        $scope.isLoggedUser = false;
+                        //addLoggedUser(response);
+                        $location.path('/');
+                        if (!$scope.$$phase)
+                            $scope.$apply();
+
+                    }, function errorCallback(response) {
+                        console.log("Error");
+                        $scope.isLoggedUser = false;
+                        $scope.user = [];
+                    });
+
+                }
+
 
 
             };
@@ -171,7 +183,8 @@ angular.module('studentAccommodationApp')
 
                 $http({
                     method: 'GET',
-                    url: SERVICE_URL + '/property-service/read-properties'
+                    url: SERVICE_URL + '/property-service/read-properties',
+                    params: {"username": $scope.username}
 
                 }).then(function successCallback(response) {
                     $scope.items = response.data;
@@ -230,6 +243,25 @@ angular.module('studentAccommodationApp')
                 console.log("user", $scope.user);
 
             };
+            
+            $scope.pdf = function (){
+                $http({
+                    method: 'GET',
+                    url: SERVICE_URL + '/property-service/generate-available-property-report',
+                    params: {
+                        "username": $scope.username
+                    }
+
+                }).then(function successCallback(response) {
+                    
+
+                }, function errorCallback(response) {
+
+                });
+               
+
+                
+            };
 
             var loadOwnerNotification = function () {
 
@@ -279,12 +311,14 @@ angular.module('studentAccommodationApp')
                     console.log("response", response);
                     $scope.isAddNewProperty = false;
                     
-                    
                 }, function errorCallback(response) {
                     $scope.isAddNewProperty = false;
-                    
-                    
+
+
                 });
+                setTimeout(function () {
+                    loadViewForStudent();
+                }, 2000);
 
             };
 
@@ -313,6 +347,42 @@ angular.module('studentAccommodationApp')
 
                 $scope.isAddNewProperty = true;
             };
+
+//            $scope.open = function (mode) {
+//
+//                $scope.Msgdata.mode = mode;
+//
+//                var modalInstance = $modal.open({
+//                    templateUrl: 'myModalContent.html',
+//                    controller: ModalInstanceCtrl,
+//                    backdrop: true,
+//                    keyboard: true,
+//                    backdropClick: true,
+//                    size: 'lg',
+//                    resolve: {
+//                        data: function () {
+//                            return $scope.Msgdata;
+//                        }
+//                    }
+//                });
+//
+//
+//                modalInstance.result.then(function (selectedItem) {
+//                    $scope.selected = selectedItem;
+//                    //alert( $scope.selected);
+//                }, function () {
+//                });
+//
+//            };
+//
+//
+//            var ModalInstanceCtrl = function ($scope, $modalInstance, data) {
+//                $scope.Msgdata = data;
+//                $scope.close = function (/*result*/) {
+//                    $modalInstance.close($scope.Msgdata);
+//                };
+//            };
+
 
             $scope.init();
 

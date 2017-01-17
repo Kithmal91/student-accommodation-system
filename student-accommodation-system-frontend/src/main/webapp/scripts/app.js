@@ -30,6 +30,10 @@ angular
                         controller: 'AboutCtrl',
                         controllerAs: 'about'
                     })
+                    .when('/forgotpassword', {
+                        templateUrl: 'views/forgotpassword.html',
+                        controller: 'forgotpwdCtrl'
+                    })
                     .when("/register", {
                         templateUrl: 'views/register.html'
                     })

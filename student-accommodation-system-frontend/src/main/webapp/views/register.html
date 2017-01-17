@@ -3,41 +3,43 @@
     <div class="form">
         <form class="register-form" name="registerForm">
             <input class="inline" type="text" name="name" ng-model="name" placeholder="name" required/>
-
             <!-- show an error if this isn't filled in -->
             <p class="msg text-right text-muted" ng-show="registerForm.username.$error.required">required</p>
 
 
             <input class="inline" type="text" name="username" ng-model="username" placeholder="username" ng-minlength="3" ng-maxlength="8" required/>
-
             <!-- show an error if username is too short -->
             <p class="msg text-right text-warning" ng-show="registerForm.username.$error.minlength">Username is too short.</p>
-
             <!-- show an error if username is too long -->
             <p class="msg text-right text-danger" ng-show="registerForm.username.$error.maxlength">Username is too long.</p>
-
             <!-- show an error if this isn't filled in -->
             <p class="msg text-right text-muted" ng-show="registerForm.username.$error.required">required</p>
 
 
             <input type="password" ng-model="password"  name="password" placeholder="password" ng-minlength="6" ng-maxlength="10" required/>
-
             <!-- show an error if username is too short -->
             <p class="msg text-right text-warning" ng-show="registerForm.password.$error.minlength">password is too short. (minimum should be 6 characters)</p>
-
             <!-- show an error if username is too long -->
             <p class="msg text-right text-danger" ng-show="registerForm.password.$error.maxlength">password is too long.(maximum should be 10 characters)</p>
-
             <!-- show an error if this isn't filled in -->
             <p class="msg text-right text-muted" ng-show="registerForm.password.$error.required">required</p>
+            
+            <input type="password" ng-disabled="password === ''" ng-model="passwordrepeat"  name="passwordrepeat" placeholder="repeat password" required/>           
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="passwordrepeat !== password">Passwords don't match.</p>
 
-            <input type="email" name="email"  ng-model="emailaddress"  placeholder="email address" required/>
             
+            
+            <input type="email" name="email"  ng-model="emailaddress"  placeholder="email address" required/> 
             <!-- show an error if username is too short -->
-            <p class="msg text-right text-warning" ng-show="!registerForm.email.$error.required && registerForm.email.$invalid">email is not valid</p>
-            
+            <p class="msg text-right text-warning" ng-show="!registerForm.email.$error.required && registerForm.email.$invalid">email is not valid</p>           
             <!-- show an error if this isn't filled in -->
             <p class="msg text-right text-muted" ng-show="registerForm.email.$error.required">required</p>
+            
+            
+            <input type="address" name="address"  ng-model="address"  placeholder="address" required/>                
+            <!-- show an error if this isn't filled in -->
+            <p class="msg text-right text-muted" ng-show="registerForm.address.$error.required">required</p>
 
             <input type="text" ng-model="mobilenumber"  placeholder="mobile number"/>
             <label style="width:30%" for="first">Student : </label>
@@ -45,7 +47,6 @@
             <br />
             <label style="width:30%" for="other">Land Owner : </label>
             <input style="width:30%" id="other" type="radio" name="content" ng-model="usertype" value="landowner" required>
-
             <button ng-disabled="registerForm.$invalid" ng-click="registerUser()">create</button>
             <p class="message">Already registered? <a href="#/">Sign In</a></p>
         </form>
