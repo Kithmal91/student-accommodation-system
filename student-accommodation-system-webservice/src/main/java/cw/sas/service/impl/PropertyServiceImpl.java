@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,9 +90,22 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<Property> readProperties() throws Exception {
-        List<Property> propertyList = propertyDao.findAll();
-        return propertyList;
+    public List<Property> readProperties(final String username) throws Exception {
+        //get all properties
+        List<Property> requestedProperties = new ArrayList<>();
+
+        for (Property property : propertyDao.findAll()) {
+            final String propertyName = property.getPropertyName();
+            Boolean status = notificationDao.isNotificationsRequestByUsernameAndPropertyName(username, propertyName);
+            if (status) {
+                property.setStatus(Status.REQUESTED);
+                requestedProperties.add(property);
+            } else {
+                property.setStatus(Status.NOT_REQUESTED);
+                requestedProperties.add(property);
+            }
+        }
+        return requestedProperties;
     }
 
     @Override

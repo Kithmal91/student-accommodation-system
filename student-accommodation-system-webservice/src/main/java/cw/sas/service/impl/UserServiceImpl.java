@@ -31,7 +31,10 @@ public class UserServiceImpl implements UserService {
 
         //check whether the user already exsists
         if (userDAO.read(request.getUsername()) != null) {
-            throw new NoResultException();
+            RegisterResponse response = new RegisterResponse();
+            response.setResponseCode("01");
+            response.setResponseMsg("User Already Exist");
+            return response;
         }
 
         SystemUser user = new SystemUser();

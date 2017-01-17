@@ -57,10 +57,10 @@ public class PropertyResource {
     @GET
     @Path("/read-properties")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readProperties() throws Exception {
+    public Response readProperties(@QueryParam("username") String username) throws Exception {
 
         try {
-            final List<Property> properties = propertyService.readProperties();
+            final List<Property> properties = propertyService.readProperties(username);
             Gson gson = new Gson();
 
             return Response.ok(gson.toJson(properties)).build();

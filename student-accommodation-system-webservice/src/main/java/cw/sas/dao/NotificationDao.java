@@ -10,4 +10,6 @@ import java.util.List;
 public interface NotificationDao extends IDao<Notification, Long> {
 
     List<Notification> getPropertyNotifications(String username);
+
+    Boolean isNotificationsRequestByUsernameAndPropertyName(String propertyName, String username);
 }

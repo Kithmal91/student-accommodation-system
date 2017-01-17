@@ -28,5 +28,27 @@ public class NotificationDaoImpl extends DaoImpl<Notification, Long> implements 
             return null;
         }
     }
+
+    @Override
+    public Boolean isNotificationsRequestByUsernameAndPropertyName(String propertyName, String username) {
+        Notification notification = null;
+        try {
+            Query query
+                    = entityManager.createQuery("SELECT c FROM " + entityClass.getName()
+                    + " c WHERE c.user.username = :username and c.propertyId.propertyName = :propertyName");
+
+            query.setParameter("username", username);
+            query.setParameter("propertyName", propertyName);
+            List<Notification> properties = query.getResultList();
+
+            if (properties.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
 

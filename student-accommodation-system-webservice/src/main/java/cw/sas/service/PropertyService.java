@@ -36,7 +36,7 @@ public interface PropertyService {
      * @return
      * @throws Exception
      */
-    List<Property> readProperties() throws Exception;
+    List<Property> readProperties(final String username) throws Exception;
 
     /**
      * read properties by username
@@ -74,6 +74,5 @@ public interface PropertyService {
      * @throws Exception
      */
     Double getFeesByUsername(String username) throws Exception;
-
 
 }

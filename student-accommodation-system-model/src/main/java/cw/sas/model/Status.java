@@ -5,7 +5,7 @@ package cw.sas.model;
  */
 public enum Status {
 
-    ACTIVE("ACTIVE"), INACTIVE("INACTIVE");
+    ACTIVE("ACTIVE"), INACTIVE("INACTIVE"), REQUESTED("REQUESTED"), NOT_REQUESTED("NOT_REQUESTED");
 
     public String getType() {
 
