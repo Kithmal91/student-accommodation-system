@@ -247,10 +247,7 @@ angular.module('studentAccommodationApp')
             $scope.pdf = function (){
                 $http({
                     method: 'GET',
-                    url: SERVICE_URL + '/property-service/generate-available-property-report',
-                    params: {
-                        "username": $scope.username
-                    }
+                    url: SERVICE_URL + '/property-service/generate-available-property-report'
 
                 }).then(function successCallback(response) {
                     
