@@ -1,6 +1,10 @@
 package cw.sas.application;
 
 import com.google.gson.Gson;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import cw.sas.model.Notification;
 import cw.sas.model.NotificationRequest;
 import cw.sas.model.Property;
@@ -13,6 +17,8 @@ import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -125,6 +131,23 @@ public class PropertyResource {
         }
     }
 
+    @GET
+    @Path("/generate-available-property-report")
+    public Response generateAvailablePropertyReports() throws Exception {
 
+        Document document = new Document();
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+            document.open();
+            document.add(new Paragraph("A Hello World PDF document."));
+            document.close();
+            writer.close();
+            return Response.ok(200).build();
+        } catch (DocumentException e) {
+            throw e;
+        } catch (FileNotFoundException e) {
+            throw e;
+        }
+    }
 }
 
