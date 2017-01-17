@@ -51,6 +51,9 @@ public class Property {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar addedDate;
 
+    @Transient
+    private Boolean isPropertyRequested;
+
     public Long getId() {
         return id;
     }
@@ -121,5 +124,13 @@ public class Property {
 
     public void setAddedDate(Calendar addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public Boolean isPropertyRequested() {
+        return isPropertyRequested;
+    }
+
+    public void setIsPropertyRequested(Boolean isPropertyRequested) {
+        this.isPropertyRequested = isPropertyRequested;
     }
 }

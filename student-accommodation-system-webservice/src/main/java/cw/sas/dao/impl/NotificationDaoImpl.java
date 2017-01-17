@@ -30,7 +30,7 @@ public class NotificationDaoImpl extends DaoImpl<Notification, Long> implements 
     }
 
     @Override
-    public Boolean isNotificationsRequestByUsernameAndPropertyName(String propertyName, String username) {
+    public Boolean isNotificationsRequestByUsernameAndPropertyName(String username, String propertyName) {
         Notification notification = null;
         try {
             Query query

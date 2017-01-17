@@ -98,10 +98,10 @@ public class PropertyServiceImpl implements PropertyService {
             final String propertyName = property.getPropertyName();
             Boolean status = notificationDao.isNotificationsRequestByUsernameAndPropertyName(username, propertyName);
             if (status) {
-                property.setStatus(Status.REQUESTED);
+                property.setIsPropertyRequested(true);
                 requestedProperties.add(property);
             } else {
-                property.setStatus(Status.NOT_REQUESTED);
+                property.setIsPropertyRequested(false);
                 requestedProperties.add(property);
             }
         }
