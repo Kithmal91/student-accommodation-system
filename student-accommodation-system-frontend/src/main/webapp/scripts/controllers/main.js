@@ -44,7 +44,8 @@ angular.module('studentAccommodationApp')
                     $scope.isLoggedUser = false;
                     //addLoggedUser(response);
                     $location.path('/');
-                    if(!$scope.$$phase) $scope.$apply();
+                    if (!$scope.$$phase)
+                        $scope.$apply();
 
                 }, function errorCallback(response) {
                     console.log("Error");
@@ -86,63 +87,76 @@ angular.module('studentAccommodationApp')
                 console.log("rane", $scope.select.singleSelect);
                 if ($scope.propertyId && $scope.propertyId !== null) {
 
-                    $http({
-                        method: 'POST',
-                        url: SERVICE_URL + '/property-service/edit-property',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            "username": $scope.username,
-                            "propertyName": $scope.propertyName,
-                            "location": $scope.location,
-                            "maximumTenants": $scope.maximumTenants,
-                            "propertyType": $scope.propertyType,
-                            "amountRent": $scope.amountRent,
-                            "status": $scope.select.singleSelect,
-                            "id": $scope.propertyId,
-                            "fee": 100
-                        }
-                    }).then(function successCallback(response) {
-                        console.log("response", response);
-
-                        $scope.isAddNewProperty = false;
-                        loadUser($scope.usertype);
-                    }, function errorCallback(response) {
-                        $scope.isAddNewProperty = false;
-                    });
+                    $scope.editProperty();
 
                 } else {
-                    $http({
-                        method: 'POST',
-                        url: SERVICE_URL + '/property-service/save-property',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            "username": $scope.username,
-                            "propertyName": $scope.propertyName,
-                            "location": $scope.location,
-                            "maximumTenants": $scope.maximumTenants,
-                            "propertyType": $scope.propertyType,
-                            "amountRent": $scope.amountRent,
-                            "status": $scope.select.singleSelect,
-                            "fee": 100
-                        }
-                    }).then(function successCallback(response) {
-                        console.log("response", response);
-                        
-                        $scope.isAddNewProperty = false;
-                        loadUser($scope.usertype);
-                    }, function errorCallback(response) {
-                        $scope.isAddNewProperty = false;
-                    });
+                    $scope.saveProperty();
                 }
                 $scope.isAddNewProperty = false;
-                loadUser($scope.usertype);
+                setTimeout(function () {
+                    $scope.loadUser();
+                }, 2000);
             };
 
-            var loadUser = function (usertype) {
+            $scope.editProperty = function () {
+                $http({
+                    method: 'POST',
+                    url: SERVICE_URL + '/property-service/edit-property',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        "username": $scope.username,
+                        "propertyName": $scope.propertyName,
+                        "location": $scope.location,
+                        "maximumTenants": $scope.maximumTenants,
+                        "propertyType": $scope.propertyType,
+                        "amountRent": $scope.amountRent,
+                        "status": $scope.select.singleSelect,
+                        "id": $scope.propertyId,
+                        "fee": 100
+                    }
+                }).then(function successCallback(response) {
+                    console.log("response", response);
+
+                    $scope.isAddNewProperty = false;
+                    $scope.loadUser($scope.usertype);
+                }, function errorCallback(response) {
+                    $scope.isAddNewProperty = false;
+                });
+
+            };
+
+            $scope.saveProperty = function () {
+                $http({
+                    method: 'POST',
+                    url: SERVICE_URL + '/property-service/save-property',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        "username": $scope.username,
+                        "propertyName": $scope.propertyName,
+                        "location": $scope.location,
+                        "maximumTenants": $scope.maximumTenants,
+                        "propertyType": $scope.propertyType,
+                        "amountRent": $scope.amountRent,
+                        "status": $scope.select.singleSelect,
+                        "fee": 100
+                    }
+                }).then(function successCallback(response) {
+                    console.log("response", response);
+
+                    $scope.isAddNewProperty = false;
+                    $scope.loadUser($scope.usertype);
+                }, function errorCallback(response) {
+                    $scope.isAddNewProperty = false;
+                });
+
+            };
+
+            $scope.loadUser = function (usertype) {
+                console.log("loaduser");
                 if (usertype === "student") {
                     loadViewForStudent();
                 } else {
@@ -171,7 +185,8 @@ angular.module('studentAccommodationApp')
 
             var loadViewForOwner = function () {
 
-                console.log("$scope.username", $scope.username);
+                console.log("loadViewForOwner $scope.username", $scope.username);
+                $scope.items = [];
                 $http({
                     method: 'GET',
                     url: SERVICE_URL + '/property-service/read-properties-by-username',
@@ -183,8 +198,32 @@ angular.module('studentAccommodationApp')
                 }).then(function successCallback(response) {
                     $scope.items = response.data;
                     console.log("$scope.items", $scope.items);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+
+                    $scope.loadFees();
 
                     loadOwnerNotification();
+                }, function errorCallback(response) {
+
+                });
+                console.log("user", $scope.user);
+
+            };
+
+            $scope.loadFees = function () {
+
+                $http({
+                    method: 'GET',
+                    url: SERVICE_URL + '/property-service/get-fee',
+                    params: {
+                        "username": $scope.username
+                    }
+
+                }).then(function successCallback(response) {
+                    $scope.fee = response.data;
+
                 }, function errorCallback(response) {
 
                 });
@@ -221,7 +260,7 @@ angular.module('studentAccommodationApp')
                 $scope.username = response.data.username;
 
                 $scope.isLoggedUser = true;
-                loadUser($scope.usertype);
+                $scope.loadUser($scope.usertype);
             };
 
             $scope.requestToView = function (itemId) {
@@ -239,8 +278,12 @@ angular.module('studentAccommodationApp')
                 }).then(function successCallback(response) {
                     console.log("response", response);
                     $scope.isAddNewProperty = false;
+                    
+                    
                 }, function errorCallback(response) {
                     $scope.isAddNewProperty = false;
+                    
+                    
                 });
 
             };
