@@ -31,4 +31,13 @@ public interface UserService {
      * check user auth
      */
     Boolean checkUserAuth(final String username, final String password) throws Exception;
+
+    /**
+     * save password
+     *
+     * @param username
+     * @param Password
+     * @return
+     */
+    SystemUser savePassword(final String username, final String Password) throws Exception;
 }

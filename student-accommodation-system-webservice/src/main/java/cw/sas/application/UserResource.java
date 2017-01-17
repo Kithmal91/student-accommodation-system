@@ -73,4 +73,34 @@ public class UserResource {
             throw e;
         }
     }
+
+    @GET
+    @Path("/check-email-username")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response checkEmailUsername(@QueryParam("email") String email, @QueryParam("username") String username) throws Exception {
+
+        try {
+            final SystemUser user = service.getUser(username);
+            if (user.getEmail().equalsIgnoreCase(email) && user.getUsername().equalsIgnoreCase(username)) {
+                return Response.ok(user).build();
+            } else {
+                return Response.ok(null).build();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @POST
+    @Path("/save-password")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response savePassword(RegisterRequest request) throws Exception {
+
+        try {
+            final SystemUser systemUser = service.savePassword(request.getUsername(), request.getPassword());
+            return Response.ok(systemUser).build();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

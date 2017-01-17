@@ -88,4 +88,16 @@ public class UserServiceImpl implements UserService {
             throw e;
         }
     }
+
+    @Override
+    public SystemUser savePassword(String username, String password) throws Exception {
+        try {
+            final SystemUser user = userDAO.read(username);
+            user.setPassword(encoder.encode(password));
+            final SystemUser updatedUser = userDAO.update(user);
+            return updatedUser;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
