@@ -167,4 +167,9 @@ public class PropertyServiceImpl implements PropertyService {
             return new Double(0);
         }
     }
+
+    @Override
+    public void generateAvailablePropertyReport() throws Exception {
+
+    }
 }

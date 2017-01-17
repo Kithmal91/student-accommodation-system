@@ -75,4 +75,11 @@ public interface PropertyService {
      */
     Double getFeesByUsername(String username) throws Exception;
 
+    /**
+     * Generate Reports
+     *
+     * @throws Exception
+     */
+    void generateAvailablePropertyReport() throws Exception;
+
 }
