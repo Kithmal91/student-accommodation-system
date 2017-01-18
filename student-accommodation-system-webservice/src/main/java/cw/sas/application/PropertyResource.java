@@ -1,9 +1,8 @@
 package cw.sas.application;
 
 import com.google.gson.Gson;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfWriter;
 import cw.sas.model.Notification;
 import cw.sas.model.NotificationRequest;
@@ -17,6 +16,7 @@ import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -137,9 +137,21 @@ public class PropertyResource {
 
         Document document = new Document();
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+            Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 14, Font.NORMAL, new CMYKColor(255, 0, 0, 0));
+            FileOutputStream file = new FileOutputStream(new File("E:\\report\\Available_Properties.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, file);
             document.open();
-            document.add(new Paragraph("A Hello World PDF document."));
+            document.add(new Paragraph("Available Properties", blueFont));
+
+            com.itextpdf.text.List orderedList = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
+            final List<Property> properties = propertyService.getAllAvailableProperties();
+
+            for (Property property : properties) {
+                orderedList.add(new ListItem("Property Name - " + property.getPropertyName() + "\n" + "Location - " +
+                        property.getLocation() + "\n" + "Maximum Tenants = " + property.getMaximumTenants() + "\n" + "Rental - " + property.getAmountRent()
+                        + "\n" + "Property Owner's Name - " + property.getUser().getName() + "\n" + "Property Owner's Mobile Number - " + property.getUser().getMobileNumber()));
+            }
+            document.add(orderedList);
             document.close();
             writer.close();
             return Response.ok(200).build();

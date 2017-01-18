@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by Kithmal on 11/7/2015.
+ * Created by User on 11/7/2015.
  */
 public class SpringPropertyUtil extends PropertyPlaceholderConfigurer {
 

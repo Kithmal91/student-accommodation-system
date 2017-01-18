@@ -80,6 +80,7 @@ public interface PropertyService {
      *
      * @throws Exception
      */
-    void generateAvailablePropertyReport() throws Exception;
+    List<Property> getAllAvailableProperties() throws Exception;
+
 
 }

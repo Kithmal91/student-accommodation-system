@@ -37,7 +37,7 @@ public class Property {
     private BigDecimal amountRent;
 
     /* specify the property owner */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_name")
     private SystemUser user;
 

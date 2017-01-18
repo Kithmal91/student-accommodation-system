@@ -169,7 +169,8 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public void generateAvailablePropertyReport() throws Exception {
-
+    public List<Property> getAllAvailableProperties() throws Exception {
+        final List<Property> availableProperties = propertyDao.getAvailableProperties();
+        return availableProperties;
     }
 }

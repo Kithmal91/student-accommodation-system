@@ -10,4 +10,6 @@ import java.util.List;
 public interface PropertyDao extends IDao<Property, Long> {
 
     List<Property> readPropertiesByUsername(final String username);
+
+    List<Property> getAvailableProperties();
 }

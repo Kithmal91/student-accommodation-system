@@ -2,6 +2,7 @@ package cw.sas.dao.impl;
 
 import cw.sas.dao.PropertyDao;
 import cw.sas.model.Property;
+import cw.sas.model.Status;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
@@ -23,6 +24,22 @@ public class PropertyDaoImpl extends DaoImpl<Property, Long> implements Property
                     + " c WHERE c.user.username = :username");
 
             query.setParameter("username", username);
+            List<Property> properties = query.getResultList();
+            return properties;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Property> getAvailableProperties() {
+        Property property = null;
+        try {
+            Query query
+                    = entityManager.createQuery("SELECT c FROM " + entityClass.getName()
+                    + " c WHERE c.status = :status");
+
+            query.setParameter("status", Status.ACTIVE);
             List<Property> properties = query.getResultList();
             return properties;
         } catch (NoResultException e) {
